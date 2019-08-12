@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 // import firebase from "firebase";
-
 import Login from "./pages/Login/index.vue";
 import Cadastrar from "./pages/Login/cadastro.vue";
 import Home from "./pages/Home";
@@ -42,19 +41,16 @@ const router = new Router({
   ]
 });
 
-// router.beforeEach((to, from, next) => {
+// router.beforeEach(async (to, from, next) => {
 //   //check fro requireAuth guard
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (!firebase.auth().currentUser) {
-//       next({
-//         path: "/",
-//         query: {
-//           redirect: to.fullPath
-//         }
-//       });
-//     } else {
-//       next();
-//     }
+//   let currentUser = store.state.user;
+
+//   let requriesAuth = to.matched.some(record => record.meta.requiresAuth);
+//   if (requriesAuth && !currentUser) {
+//     await store.dispatch("signIn");
+//     next("/");
+//   } else {
+//     next();
 //   }
 // });
 

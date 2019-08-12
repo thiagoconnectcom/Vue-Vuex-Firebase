@@ -1,20 +1,12 @@
 <template>
-  <div>
-    <Header />
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
-  </div>
+  <transition name="fade" mode="out-in">
+    <router-view />
+  </transition>
 </template>
 
 <script>
-import Header from "./components/Header";
-
 export default {
-  name: "app",
-  components: {
-    Header
-  }
+  name: "app"
 };
 </script>
 

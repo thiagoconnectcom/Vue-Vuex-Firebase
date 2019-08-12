@@ -4,7 +4,7 @@
       <img
         src="https://static.wixstatic.com/media/bbc887_d7a50ce2e13b4ed1965288d79a8f9875~mv2.png/v1/fill/w_201,h_36,al_c,q_80,usm_0.66_1.00_0.01/bbc887_d7a50ce2e13b4ed1965288d79a8f9875~mv2.webp"
       />
-      <button v-on:click="signOut">close</button>
+      <button class="close" v-on:click="signOut">close</button>
     </header>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
         .signOut()
         .then(function() {
           alert(`Até a Próxima Vez!`);
-          this.$router.push("/");
+          window.location.href = "/";
         })
         .catch(function(error) {
           // An error happened.
@@ -37,9 +37,18 @@ export default {
 
 <style lang="scss">
 header {
+  padding: 30px;
   background-color: black;
   img {
-    padding: 30px;
+  }
+  .close {
+    float: right;
+    color: #fff;
+    background-color: transparent;
+    font-weight: bold;
+  }
+  .close:hover {
+    color: red;
   }
 }
 </style>

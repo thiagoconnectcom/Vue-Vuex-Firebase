@@ -54,14 +54,18 @@ export default {
       password: ""
     };
   },
+
   methods: {
     sign: function() {
+      const { email, password } = this;
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
+        .signInWithEmailAndPassword(email, password)
         .then(
           () => {
             alert(`email encontrado com sucesso  `);
+
+            // this.$store.commit('setTarefas', )
             this.$router.push("/home");
           },
           err => {

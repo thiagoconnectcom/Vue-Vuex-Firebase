@@ -34,7 +34,7 @@
           <button type="submit" class="btn btn-success">Cadastrar uma Nova Conta</button>
         </div>
         <div class="text-center mt-3 mb-5">
-          <router-link to="/cadastrar">Cadastro</router-link>
+          <router-link to="/">Voltar para Página Inicial</router-link>
         </div>
       </form>
     </div>
@@ -54,11 +54,13 @@ export default {
       password: ""
     };
   },
+
   methods: {
     Cadastrar: function() {
+      const { email, password } = this;
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(email, password)
         .then(
           () => {
             alert(`email criado com sucesso `);
@@ -82,6 +84,15 @@ export default {
   .wrap-form {
     background-color: #f8f8f8;
     border-radius: 5px;
+    a {
+      color: #000;
+      font-weight: bold;
+      transition: 0.6s;
+      &:hover {
+        text-decoration: none;
+        color: blue;
+      }
+    }
   }
 }
 </style>

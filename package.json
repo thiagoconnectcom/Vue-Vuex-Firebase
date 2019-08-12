@@ -9,16 +9,19 @@
   },
   "dependencies": {
     "@firebase/app": "^0.4.14",
+    "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.27",
+    "bootstrap-vue": "^2.0.0-rc.28",
     "core-js": "^2.6.5",
     "firebase": "^6.3.5",
     "firebase-admin": "^8.3.0",
     "http2": "^3.3.7",
     "vue": "^2.6.10",
+    "vue-axios": "^2.1.4",
     "vue-firestore": "^0.3.22",
     "vue-router": "^3.1.2",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",

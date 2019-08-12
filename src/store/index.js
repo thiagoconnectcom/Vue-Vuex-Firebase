@@ -12,5 +12,15 @@ export default new Vuex.Store({
   modules: {
     auth
   },
-  strict: debug
+  strict: debug,
+
+  state: {
+    tarefas: {}
+  },
+
+  mutations: {
+    setTarefas(state, payload) {
+      state.tarefas = payload;
+    }
+  }
 });
