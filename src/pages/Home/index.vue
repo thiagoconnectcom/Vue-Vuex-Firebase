@@ -76,11 +76,7 @@ export default {
   },
 
   watch: {
-    data: function(val) {
-      if (this.data == val) {
-        alert("data sao iguais");
-      }
-    }
+    data: function(val) {}
   },
 
   mounted: function() {
@@ -111,6 +107,7 @@ export default {
             description: this.description,
             data: this.data
           },
+
           function(error) {
             if (error) {
               alert("Error !!!");
@@ -129,7 +126,12 @@ export default {
             }
           }
         );
+      this.title = "";
+      this.description = "";
+      this.data = "";
+      this.prioridade = "";
     },
+
     remove(id) {
       const that = this;
       firebase
