@@ -3,6 +3,15 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
+import VueUid from 'vue-uid';
+ 
+Vue.use (VueUid);
+
+import lodash from "lodash";
+import VueLodash from "vue-lodash";
+
+Vue.use(VueLodash, lodash);
+
 import axios from "axios";
 import VueAxios from "vue-axios";
 

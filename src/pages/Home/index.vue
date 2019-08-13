@@ -33,7 +33,6 @@
         </div>
       </div>
     </div>
-    <pre>{{this.$store.state.tarefas}}</pre>
   </div>
 </template>
 
@@ -57,12 +56,11 @@ export default {
       title: "",
       prioridade: "",
       description: "",
-      data: ""
+      data: "",
+      configs: {
+        orderBy: "stargazers_count"
+      }
     };
-  },
-
-  watch: {
-    data: function(val) {}
   },
 
   mounted: function() {
@@ -84,15 +82,19 @@ export default {
 
         that.$store.commit("settarefas", res);
       })
+
       .catch(err => {
         console.log(err.message);
       });
   },
+
+  
+
   methods: {
     writeUserData() {
       const that = this;
 
-      // let currentdata = new Date();
+      // let currentdata = new Date();  
       // let comparedata = this.data;
 
       // if (currentdata > comparedata) {
