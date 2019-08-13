@@ -19,7 +19,7 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setTarefas(state, payload) {
+    settarefas(state, payload) {
       state.tarefas = payload;
     }
   }

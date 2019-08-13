@@ -42,17 +42,4 @@ const router = new Router({
   ]
 });
 
-// router.beforeEach(async (to, from, next) => {
-//   //check fro requireAuth guard
-//   let currentUser = store.state.user;
-
-//   let requriesAuth = to.matched.some(record => record.meta.requiresAuth);
-//   if (requriesAuth && !currentUser) {
-//     await store.dispatch("signIn");
-//     next("/");
-//   } else {
-//     next();
-//   }
-// });
-
 export default router;

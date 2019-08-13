@@ -26,52 +26,38 @@
         </div>
         <div class="col-md-6">
           <!--Caso o objeto esteja vazio-->
-          <div v-if="tarefa == null ">
-            <p class="text-center mb-0" style="font-size: 10rem; font-weight: 900;">0!</p>
-            <p
-              class="text-center"
-              style="font-size: 2rem;"
-            >Esse é o numero de resultados encontrados!</p>
-          </div>
-          <!--Card de Tarefas-->
-          <div class="card mt-1 mb-4" v-for="(itens, idx) in tarefa" :key="idx">
-            <div class="p-2">
-              <pre>{{remover}}</pre>
-              <input type="checkbox" v-on:click="remove(idx)" />
-              <span class="pl-2">{{itens.prioridade}}</span>
-              <span class="pl-2">{{itens.title}}</span>
+          <PageNull v-if="this.$store.state.tarefas == null " />
 
-              <span class="float-right">{{itens.data}}</span>
-            </div>
-            <div class="p-2">
-              <span class="pl-2">{{itens.description}}</span>
-            </div>
-          </div>
-          <pre>{{data}}</pre>
+          <!--Card de Tarefas-->
+          <Card :list-tarefas="this.$store.state.tarefas" />
         </div>
       </div>
     </div>
+    <pre>{{this.$store.state.tarefas}}</pre>
   </div>
 </template>
 
 <script>
 import firebase, { database } from "firebase";
 import Header from "../../components/Header";
+import PageNull from "../../components/PageNull";
+import Card from "../../components/Card";
 import axios from "axios";
+import moment from "vue-moment";
 
 export default {
   name: "Home",
   components: {
-    Header
+    Header,
+    PageNull,
+    Card
   },
   data() {
     return {
       title: "",
       prioridade: "",
       description: "",
-      tarefa: {},
-      data: "",
-      remover: false
+      data: ""
     };
   },
 
@@ -88,7 +74,15 @@ export default {
       .then(function(response) {
         const res = response.data;
 
-        that.tarefa = res;
+        // res.map(key, valor) {
+        //   if (key == 'data') {
+        //     if (value > new Date()) {
+        //       console.log("TAREFA VENCIDA"):
+        //     }
+        //   }
+        // });
+
+        that.$store.commit("settarefas", res);
       })
       .catch(err => {
         console.log(err.message);
@@ -97,6 +91,17 @@ export default {
   methods: {
     writeUserData() {
       const that = this;
+
+      // let currentdata = new Date();
+      // let comparedata = this.data;
+
+      // if (currentdata > comparedata) {
+      //   console.log('ESSA DATA JA PASSOU');
+      // }
+
+      // console.log(currentdata, comparedata);
+
+      // return;
       firebase
         .database()
         .ref("tarefa/")
@@ -118,7 +123,7 @@ export default {
               })
                 .then(function(response) {
                   const res = response.data;
-                  that.tarefa = res;
+                  that.$store.commit("settarefas", res);
                 })
                 .catch(err => {
                   console.log(err.message);
@@ -130,30 +135,6 @@ export default {
       this.description = "";
       this.data = "";
       this.prioridade = "";
-    },
-
-    remove(id) {
-      const that = this;
-      firebase
-        .database()
-        .ref("tarefa/" + id)
-        .remove(function(error) {
-          if (error) {
-            alert("Error !!!");
-          } else {
-            axios({
-              method: "get",
-              url: "https://evox-1d3da.firebaseio.com/tarefa.json"
-            })
-              .then(function(response) {
-                const res = response.data;
-                that.tarefa = res;
-              })
-              .catch(err => {
-                console.log(err.message);
-              });
-          }
-        });
     }
   }
 };
