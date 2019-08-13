@@ -25,9 +25,18 @@
           </form>
         </div>
         <div class="col-md-6">
+          <!--Caso o objeto esteja vazio-->
+          <div v-if="tarefa == null ">
+            <p class="text-center mb-0" style="font-size: 10rem; font-weight: 900;">0!</p>
+            <p
+              class="text-center"
+              style="font-size: 2rem;"
+            >Esse é o numero de resultados encontrados!</p>
+          </div>
+          <!--Card de Tarefas-->
           <div class="card mt-1 mb-4" v-for="(itens, idx) in tarefa" :key="idx">
-            <pre>{{idx}}</pre>
             <div class="p-2">
+              <pre>{{remover}}</pre>
               <input type="checkbox" v-on:click="remove(idx)" />
               <span class="pl-2">{{itens.prioridade}}</span>
               <span class="pl-2">{{itens.title}}</span>
@@ -61,7 +70,8 @@ export default {
       prioridade: "",
       description: "",
       tarefa: {},
-      data: ""
+      data: "",
+      remover: false
     };
   },
 
@@ -121,19 +131,33 @@ export default {
         );
     },
     remove(id) {
+      const that = this;
       firebase
         .database()
         .ref("tarefa/" + id)
-        .remove();
+        .remove(function(error) {
+          if (error) {
+            alert("Error !!!");
+          } else {
+            axios({
+              method: "get",
+              url: "https://evox-1d3da.firebaseio.com/tarefa.json"
+            })
+              .then(function(response) {
+                const res = response.data;
+                that.tarefa = res;
+              })
+              .catch(err => {
+                console.log(err.message);
+              });
+          }
+        });
     }
   }
 };
 </script>
 
 <style>
-.risca {
-  text-decoration: line-through;
-}
 .input {
   width: 100%;
   border: 1px solid #eee;

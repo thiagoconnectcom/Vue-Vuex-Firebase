@@ -18,6 +18,8 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 import router from "./router";
 
+Vue.use(require("vue-moment"));
+
 import store from "./store";
 
 new Vue({
