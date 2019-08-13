@@ -2,8 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 // import firebase from "firebase";
 import Login from "./pages/Login/index.vue";
-import Cadastrar from "./pages/Login/cadastro.vue";
+import Cadastrar from "./pages/Login/cadastro";
 import Home from "./pages/Home";
+import Error from "./pages/Error";
 
 Vue.use(Router);
 
