@@ -8,13 +8,24 @@
         <div class="col-md-6">
           <form @submit.prevent="writeUserData()">
             <div class="col-md-4 mt-2 mb-2">
-              <input v-model="prioridade" class="p-2 input" type="text" />
+              <input
+                placeholder="defina a prioridade"
+                v-model="prioridade"
+                class="p-2 input"
+                type="text"
+              />
             </div>
             <div class="col-md-12 mt-2 mb-2">
-              <input v-model="title" class="p-2 input" type="text" />
+              <input placeholder="Insira um Titulo" v-model="title" class="p-2 input" type="text" />
             </div>
             <div class="col-md-12 mt-2 mb-2">
-              <textarea rows="6" v-model="description" class="p-2 input" type="text" />
+              <textarea
+                placeholder="Escreva uma descrição da tarefa"
+                rows="6"
+                v-model="description"
+                class="p-2 input"
+                type="text"
+              />
             </div>
             <div class="col-md-12 mt-2 mb-2">
               <input v-model="data" class="p-2 input" type="date" />
@@ -43,6 +54,7 @@ import PageNull from "../../components/PageNull";
 import Card from "../../components/Card";
 import axios from "axios";
 import moment from "vue-moment";
+import VueMoment from "vue-moment";
 
 export default {
   name: "Home",
@@ -56,10 +68,7 @@ export default {
       title: "",
       prioridade: "",
       description: "",
-      data: "",
-      configs: {
-        orderBy: "stargazers_count"
-      }
+      data: ""
     };
   },
 
@@ -72,38 +81,42 @@ export default {
       .then(function(response) {
         const res = response.data;
 
-        // res.map(key, valor) {
-        //   if (key == 'data') {
-        //     if (value > new Date()) {
-        //       console.log("TAREFA VENCIDA"):
-        //     }
-        //   }
-        // });
-
         that.$store.commit("settarefas", res);
       })
-
       .catch(err => {
         console.log(err.message);
       });
   },
 
-  
-
   methods: {
     writeUserData() {
       const that = this;
 
-      // let currentdata = new Date();  
-      // let comparedata = this.data;
+      var currentdata = new Date();
+      var responsedata = currentdata.toLocaleDateString();
+      var dataAtual = responsedata.split("/").join("");
+      var resData = parseInt(dataAtual);
+      console.log(resData);
 
-      // if (currentdata > comparedata) {
-      //   console.log('ESSA DATA JA PASSOU');
-      // }
+      let comparedata = this.data;
+      let rescomparedata = comparedata
+        .split("-")
+        .reverse()
+        .join("");
+      var resCompare = parseInt(rescomparedata);
+      console.log(resCompare);
 
-      // console.log(currentdata, comparedata);
+      if (resData > resCompare) {
+        alert("Essa Data já Passou ");
+        var audio = new Audio(
+          require("../../assets/Aviso/service-bell_daniel_simion.mp3")
+        );
+        audio.play();
+        return false;
+      } else if (resData == resCompare) {
+        alert("A Tarefa Expira hoje");
+      }
 
-      // return;
       firebase
         .database()
         .ref("tarefa/")

@@ -4,7 +4,7 @@ import App from "./App.vue";
 Vue.config.productionTip = false;
 
 import VueUid from 'vue-uid';
- 
+Vue.use(require('vue-moment'));
 Vue.use (VueUid);
 
 import lodash from "lodash";

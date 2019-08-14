@@ -23,9 +23,9 @@ export default {
       firebase
         .auth()
         .signOut()
-        .then(function() {
+        .then(()=> {
           alert(`Até a Próxima Vez!`);
-          window.location.href = "/";
+          this.$router.push("/");   
         })
         .catch(function(error) {
           // An error happened.
