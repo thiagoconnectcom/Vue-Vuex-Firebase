@@ -53,8 +53,7 @@ import Header from "../../components/Header";
 import PageNull from "../../components/PageNull";
 import Card from "../../components/Card";
 import axios from "axios";
-import moment from "vue-moment";
-import VueMoment from "vue-moment";
+
 
 export default {
   name: "Home",

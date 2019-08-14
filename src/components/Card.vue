@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="card mt-1 mb-4" v-for="(itens, idx) in orderedUsers" :key="idx">
-      <pre>{{orderedUsers}}</pre>
       <div :class="{'red': items.indexOf(idx) >= 0 }">
         <div class="p-2">
           <input type="checkbox" @click="remove(idx)" />
@@ -41,19 +40,9 @@ export default {
     }
   },
   methods: {
-    changecolor: function(idx) {
-      let that = this;
-
-      let indice = this.items.indexOf(idx);
-
-      if (indice >= 0) {
-        this.items.splice(indice);
-      } else {
-        this.items.push(idx);
-      }
-    },
     remove(id) {
       const that = this;
+
       firebase
         .database()
         .ref("tarefa/" + id)

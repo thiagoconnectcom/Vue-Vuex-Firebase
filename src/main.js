@@ -3,10 +3,6 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
-import VueUid from 'vue-uid';
-Vue.use(require('vue-moment'));
-Vue.use (VueUid);
-
 import lodash from "lodash";
 import VueLodash from "vue-lodash";
 
@@ -26,8 +22,6 @@ Vue.use(BootstrapVue);
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 import router from "./router";
-
-Vue.use(require("vue-moment"));
 
 import store from "./store";
 
